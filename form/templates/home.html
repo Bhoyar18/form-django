@@ -3,6 +3,7 @@
 <form method="POST">
     {% csrf_token %}
     {{form}}
+    {{msg}}
     <button type="submit">Submit</button>
 </form>
 <!-- {% if data %}

@@ -31,8 +31,18 @@ def home(request):
             city=form.cleaned_data["city"]
             email=form.cleaned_data["email"]
             contact=form.cleaned_data["contact"]
+
             print(name,city,email,contact)
             # data={"fname":fname,"lname":lname,"email":email,"contact":contact}
             # Student.objects.create(Stu_name=name,Stu_city=city,Stu_email=email,Stu_contact=contact)
-            form.save()
+            user=Student.objects.filter(email=email)
+            if user:
+                msg="Email already exist"
+                form=StudentForm()
+                return render(request,"home.html",{"form":form ,"msg":msg})
+            else:
+                form.save()
+                msg="Registration successful"
+                form=StudentForm()
+                return render(request,"home.html",{"form":form,"msg":msg})
     return render(request,"home.html",{"form":form})
