@@ -42,7 +42,11 @@ def home(request):
                 return render(request,"home.html",{"form":form ,"msg":msg})
             else:
                 form.save()
-                msg="Registration successful"
+                msg="Registration successfull"
                 form=StudentForm()
                 return render(request,"home.html",{"form":form,"msg":msg})
     return render(request,"home.html",{"form":form})
+
+def login(request):
+    form=LoginForm()
+    return render(request,'login.html',{'form':form})

@@ -7,3 +7,7 @@ class Student(models.Model):
     city=models.CharField(max_length=90)
     email=models.EmailField()
     contact=models.IntegerField()
+
+class Login(models.Model):
+    name=models.CharField(max_length=90)
+    contact=models.IntegerField()   
