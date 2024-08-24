@@ -9,10 +9,12 @@
 
 <body>
     <h1>Login form</h1>
-
-    {{form}}
-
-    <button>Login</button>
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        {{msg}}
+        <button type="submit">Submit</button>
+    </form>
 </body>
 
 </html>

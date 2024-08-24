@@ -25,13 +25,12 @@ def home(request):
     # return render(request,"home.html",{"form":form})
     if request.method=="POST":
         form=StudentForm(request.POST)
-        
         if form.is_valid():
             name=form.cleaned_data["name"]
             city=form.cleaned_data["city"]
             email=form.cleaned_data["email"]
             contact=form.cleaned_data["contact"]
-            print(name,city,email,contact)
+            print(name,city,email ,contact)
             # data={"fname":fname,"lname":lname,"email":email,"contact":contact}
             # Student.objects.create(Stu_name=name,Stu_city=city,Stu_email=email,Stu_contact=contact)
             user=Student.objects.filter(email=email)
@@ -46,6 +45,25 @@ def home(request):
                 return render(request,"home.html",{"form":form,"msg":msg})
     return render(request,"home.html",{"form":form})
 
+
 def login(request):
     form=LoginForm()
+    if request.method=="POST":
+        form=LoginForm(request.POST)
+        if form.is_valid():
+            email=form.cleaned_data["email"]
+            contact=form.cleaned_data["contact"]
+            print(email ,contact)
+            # data={"fname":fname,"lname":lname,"email":email,"contact":contact}
+            # Student.objects.create(Stu_name=name,Stu_city=city,Stu_email=email,Stu_contact=contact)
+            user=Login.objects.filter(email=email)
+            if user:
+                msg="Email already exist"
+                form=LoginForm()
+                return render(request,"login.html",{"form":form ,"msg":msg})
+            else:
+                form.save()
+                msg="Registration successfull"
+                form=LoginForm()
+                return render(request,"login.html",{"form":form,"msg":msg})
     return render(request,'login.html',{'form':form})
