@@ -15,4 +15,4 @@ class StudentForm(forms.ModelForm):
 class LoginForm(forms.ModelForm):
     class Meta:
         model = Login
-        fields=('name','contact')
+        fields=('email','contact')

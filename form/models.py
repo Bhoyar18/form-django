@@ -9,5 +9,5 @@ class Student(models.Model):
     contact=models.IntegerField()
 
 class Login(models.Model):
-    name=models.CharField(max_length=90)
+    email=models.CharField(max_length=90)
     contact=models.IntegerField()   

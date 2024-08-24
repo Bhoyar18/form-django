@@ -31,7 +31,6 @@ def home(request):
             city=form.cleaned_data["city"]
             email=form.cleaned_data["email"]
             contact=form.cleaned_data["contact"]
-
             print(name,city,email,contact)
             # data={"fname":fname,"lname":lname,"email":email,"contact":contact}
             # Student.objects.create(Stu_name=name,Stu_city=city,Stu_email=email,Stu_contact=contact)

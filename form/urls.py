@@ -4,7 +4,7 @@ from .views import *
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('registration/',home,name='home'),
+    path('registration/',home,name='registration'),
     path('login/',login,name='login')
 
     
