@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
     <h1>Login form</h1>
-    <form method="POST">
+    <form action="login_data" method="POST">
         {% csrf_token %}
         {{form}}
         {{msg}}
-        <button type="submit">Submit</button>
+        <button type="submit">Login</button>
     </form>
 </body>
 

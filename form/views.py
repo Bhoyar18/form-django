@@ -49,21 +49,39 @@ def home(request):
 def login(request):
     form=LoginForm()
     if request.method=="POST":
-        form=LoginForm(request.POST)
-        if form.is_valid():
-            email=form.cleaned_data["email"]
-            contact=form.cleaned_data["contact"]
-            print(email ,contact)
-            # data={"fname":fname,"lname":lname,"email":email,"contact":contact}
-            # Student.objects.create(Stu_name=name,Stu_city=city,Stu_email=email,Stu_contact=contact)
-            user=Login.objects.filter(email=email)
-            if user:
-                msg="Email already exist"
-                form=LoginForm()
-                return render(request,"login.html",{"form":form ,"msg":msg})
-            else:
-                form.save()
-                msg="Registration successfull"
-                form=LoginForm()
-                return render(request,"login.html",{"form":form,"msg":msg})
+        data=LoginForm(request.POST)
+        loginemail=form.cleaned_data["email"]
+        logincontact=form.cleaned_data["contact"]
+        user=Login.objects.filter(email=loginemail)
+        if user:
+            user=Login.objects.get(email=loginemail)
+            print(user)
+        
+        
+ 
+        # if form.is_valid():
+        #     email=form.cleaned_data["email"]
+        #     contact=form.cleaned_data["contact"]
+        #     print(email ,contact)
+        #     user=Login.objects.filter(email=email)
+        #     if user:
+        #         msg="Email already exist"
+        #         form=LoginForm()
+        #         return render(request,"login.html",{"form":form ,"msg":msg})
+        #     else:
+        #         form.save()
+        #         msg="Registration successfull"
+        #         form=LoginForm()
+        #         return render(request,"login.html",{"form":form,"msg":msg})
     return render(request,'login.html',{'form':form})
+
+def login_data(request):
+    form=LoginForm()
+    if request.method=="POST":
+        data=LoginForm(request.POST)
+        loginemail=form.cleaned_data["email"]
+        logincontact=form.cleaned_data["contact"]
+        user=Login.objects.filter(email=loginemail)
+        if user:
+            user=Login.objects.get(email=loginemail)
+            print(user)
