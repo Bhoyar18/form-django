@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .form import *
+from .forms import *
 from .models import *
 
 # Create your views here.
@@ -21,67 +21,53 @@ from .models import *
 
 
 def home(request):
-    form=StudentForm()
-    # return render(request,"home.html",{"form":form})
-    if request.method=="POST":
-        form=StudentForm(request.POST)
-        if form.is_valid():
-            name=form.cleaned_data["name"]
-            city=form.cleaned_data["city"]
-            email=form.cleaned_data["email"]
-            contact=form.cleaned_data["contact"]
-            print(name,city,email ,contact)
-            # data={"fname":fname,"lname":lname,"email":email,"contact":contact}
-            # Student.objects.create(Stu_name=name,Stu_city=city,Stu_email=email,Stu_contact=contact)
-            user=Student.objects.filter(email=email)
-            if user:
-                msg="Email already exist"
-                form=StudentForm()
-                return render(request,"home.html",{"form":form ,"msg":msg})
-            else:
-                form.save()
-                msg="Registration successfull"
-                form=StudentForm()
-                return render(request,"home.html",{"form":form,"msg":msg})
-    return render(request,"home.html",{"form":form})
-
-
+    form = RegistrationForm()
+    if request.method=='POST':
+        data = RegistrationForm(request.POST)
+        if data.is_valid():
+            name=data.cleaned_data['stu_name']
+            email=data.cleaned_data['stu_email']
+            city=data.cleaned_data['stu_city']
+            contact=data.cleaned_data['stu_mobile']
+            password = data.cleaned_data['stu_password']
+            print(name,email,city,contact,password)
+            data.save()
+            msg="Registration Successfully"
+            return render(request,'home.html',{'form':form,'msg':msg})
+    else:
+        return render(request,'home.html',{'form':form})
+    
 def login(request):
-    form=LoginForm()
+    form = LoginForm()
     if request.method=="POST":
-        data=LoginForm(request.POST)
-        loginemail=form.cleaned_data["email"]
-        logincontact=form.cleaned_data["contact"]
-        user=Login.objects.filter(email=loginemail)
-        if user:
-            user=Login.objects.get(email=loginemail)
-            print(user)
-        
-        
- 
-        # if form.is_valid():
-        #     email=form.cleaned_data["email"]
-        #     contact=form.cleaned_data["contact"]
-        #     print(email ,contact)
-        #     user=Login.objects.filter(email=email)
-        #     if user:
-        #         msg="Email already exist"
-        #         form=LoginForm()
-        #         return render(request,"login.html",{"form":form ,"msg":msg})
-        #     else:
-        #         form.save()
-        #         msg="Registration successfull"
-        #         form=LoginForm()
-        #         return render(request,"login.html",{"form":form,"msg":msg})
-    return render(request,'login.html',{'form':form})
+        data = LoginForm(request.POST)
+        if data.is_valid():
+            email = data.cleaned_data['stu_email']
+            password = data.cleaned_data['stu_password']
+            # print(email,password)
+            user = StudentModel.objects.filter(stu_email=email)
+            
+            if user:
+                user = StudentModel.objects.get(stu_email=email)
+                # print(user.stu_password)
+                if user.stu_password==password:
+                    name = user.stu_name
+                    email = user.stu_email
+                    contact = user.stu_mobile
+                    city = user.stu_city
+                    data = {
+                        'name':name,
+                        'email':email,
+                        'contact':contact,
+                        'city':city
+                    }
+                    return render(request,'dashboard.html',{'data':data})
+                else:
+                    msg = "Email & Password not matched"
+                    return render(request,'login.html',{'form':form,'msg':msg})
+            else:
+                msg = "Email not register so please register first"
+                return render(request,'login.html',{'form':form,'msg':msg})
+    else:
+        return render(request,'login.html',{'form':form})
 
-def login_data(request):
-    form=LoginForm()
-    if request.method=="POST":
-        data=LoginForm(request.POST)
-        loginemail=form.cleaned_data["email"]
-        logincontact=form.cleaned_data["contact"]
-        user=Login.objects.filter(email=loginemail)
-        if user:
-            user=Login.objects.get(email=loginemail)
-            print(user)

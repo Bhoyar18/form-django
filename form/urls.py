@@ -1,13 +1,12 @@
 from django.contrib import admin
 from django.urls import path
-from .views import *
+from form import views
+
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    path('registration/',home,name='registration'),
-    path('login/',login,name='login'),
-
-    path('login_data/',login_data,name='login_data')
+    path('admin/', admin.site.urls),
+    path('',views.home,name='home'),
+    path("login/",views.login,name='login')
+]
 
     
-]
