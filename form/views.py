@@ -44,12 +44,12 @@ def login(request):
         if data.is_valid():
             email = data.cleaned_data['stu_email']
             password = data.cleaned_data['stu_password']
-            # print(email,password)
+            print(email,password)
             user = StudentModel.objects.filter(stu_email=email)
             
             if user:
                 user = StudentModel.objects.get(stu_email=email)
-                # print(user.stu_password)
+                print(user.stu_password)
                 if user.stu_password==password:
                     name = user.stu_name
                     email = user.stu_email
