@@ -22,5 +22,5 @@ class StudentModel(models.Model):
 
 class StudentQuery(models.Model):
     stu_name=models.CharField(max_length=100)
-    stu_emai=models.EmailField()
+    stu_email=models.EmailField()
     stu_query=models.CharField(max_length=400)

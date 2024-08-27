@@ -55,13 +55,16 @@ def login(request):
                     email = user.stu_email
                     contact = user.stu_mobile
                     city = user.stu_city
+                    password = user.stu_password
                     data = {
                         'name':name,
                         'email':email,
                         'contact':contact,
-                        'city':city
+                        'city':city,
+                        'password':password
                     }
-                    return render(request,'dashboard.html',{'data':data})
+                    form1=QueryForm()
+                    return render(request,'dashboard.html',{'data':data,'query':form1})
                 else:
                     msg = "Password not matched"
                     return render(request,'login.html',{'form':form,'msg':msg})

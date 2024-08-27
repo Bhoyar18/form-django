@@ -50,7 +50,7 @@ class LoginForm(forms.ModelForm):
 class QueryForm(forms.ModelForm):
     class Meta:
         model = StudentQuery
-        fields = ('stu_name,stu_email,stu_query')
+        fields = ('stu_name','stu_email','stu_query')
         widgets = {
             'stu_email': forms.EmailInput(attrs={'class': 'form-control'}),
             'stu_name':forms.TextInput(attrs={'class': 'form-control'}),
