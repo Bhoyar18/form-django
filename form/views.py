@@ -63,7 +63,7 @@ def login(request):
                     }
                     return render(request,'dashboard.html',{'data':data})
                 else:
-                    msg = "Email & Password not matched"
+                    msg = "Password not matched"
                     return render(request,'login.html',{'form':form,'msg':msg})
             else:
                 msg = "Email not register so please register first"
