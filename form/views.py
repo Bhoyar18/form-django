@@ -63,7 +63,11 @@ def login(request):
                         'city':city,
                         'password':password
                     }
-                    form1=QueryForm()
+                    initial_data = {
+                                    'stu_name': name,
+                                     'stu_email': email
+                                }
+                    form1=QueryForm(initial=initial_data)
                     return render(request,'dashboard.html',{'data':data,'query':form1})
                 else:
                     msg = "Password not matched"
