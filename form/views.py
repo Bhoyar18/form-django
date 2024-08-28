@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from .forms import *
 from .models import *
 
@@ -77,4 +78,16 @@ def login(request):
                 return render(request,'login.html',{'form':form,'msg':msg})
     else:
         return render(request,'login.html',{'form':form})
+
+def query(request):
+    # return HttpResponse("helooo")
+    form = QueryForm
+    if request.method == "POST":
+        query_data = QueryForm(request.POST)
+        # print(query_data)
+        if query_data.is_valid():
+            name=query_data.cleaned_data['stu_name']
+            email=query_data.cleaned_data['stu_email']
+            query=query_data.cleaned_data['stu_query']
+            print(name,email,query)
 
