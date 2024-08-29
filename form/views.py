@@ -85,40 +85,10 @@ def query(request):
     if request.method == "POST":
         query_data = QueryForm(request.POST)
         print(query_data)
-        if query_data.is_valid():
-            name=query_data.cleaned_data['stu_name']
-            email=query_data.cleaned_data['stu_email']
-            query=query_data.cleaned_data['stu_query']
-            print(name,email,query)
-        if user:
-                user = StudentModel.objects.get(stu_email=email)
-                print(user.stu_password)
-                if user.stu_password==password:
-                    name = user.stu_name
-                    email = user.stu_email
-                    contact = user.stu_mobile
-                    city = user.stu_city
-                    password = user.stu_password
-                    data = {
-                        'name':name,
-                        'email':email,
-                        'contact':contact,
-                        'city':city,
-                        'password':password
-                    }
-                    initial_data = {
-                                    'stu_name': name,
-                                     'stu_email': email
-                                }
-                    form1=QueryForm(initial=initial_data)
-                    return render(request,'dashboard.html',{'data':data,'query':form1})
-                else:
-                    msg = "Password not matched"
-                    return render(request,'login.html',{'form':form,'msg':msg})
-        else:
-                msg = "Email not register so please register first"
-                return render(request,'login.html',{'form':form,'msg':msg})
-    else:
-        return render(request,'login.html',{'form':form})
-
-
+        query_data.save()
+        # if query_data.is_valid():
+        #     name=query_data.cleaned_data['stu_name']
+        #     email=query_data.cleaned_data['stu_email']
+        #     query=query_data.cleaned_data['stu_query']
+        #     print(name,email,query)
+        
