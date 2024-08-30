@@ -30,7 +30,7 @@
     </form>
   </div>
   <div class="row-6">
-    <table class="table table-success table-striped">
+    <table class="table caption-top table-dark">
       <thead>
         <tr>
           <th scope="col">Id</th>
@@ -42,14 +42,16 @@
         </tr>
       </thead>
       {% if data1 %}
-      {% for i in data1 % }
+      {% for i in data1 %}
       <tr>
-        <th scope="row">1</th>
+        <!-- <th scope="row">1</th> -->
         <td>{{i.id}}</td>
         <td>{{i.stu_name}}</td>
         <td>{{i.stu_email}}</td>
         <td>{{i.stu_query}}</td>
-        <td><a href="#"><button type="button" class="btn btn-warning">Edit</button></a></td>
+        <td><button type="button" class="btn btn-warning">EDIT</button></td>
+        <td><button type="button" class="btn btn-danger">DELETE</button></td>
+
 
       </tr>
 

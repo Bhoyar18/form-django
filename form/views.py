@@ -80,41 +80,35 @@ def login(request):
         return render(request,'login.html',{'form':form})
 
 def query(request):
-    # return HttpResponse("helooo")
-    form = QueryForm
-    if request.method == "POST":
-        query_data = QueryForm(request.POST)
-        print(query_data)
-        query_data.save()
+    # return HttpResponse("hi.............")
+    form = QueryForm()
+    if request.method=="POST":
+        query_data = QueryForm(request.POST) 
+        # print(query_data)
         if query_data.is_valid():
-            name=query_data.cleaned_data['stu_name']
-            email=query_data.cleaned_data['stu_email']
-            query=query_data.cleaned_data['stu_query']
-            print(name,email,query)
-            user = StudentModel.objects.filter(stu_email=email)
-            
+            name =  query_data.cleaned_data['stu_name']
+            email = query_data.cleaned_data['stu_email']
+            query = query_data.cleaned_data['stu_query']
+            # print(email,name,query)
+            query_data.save()
+            user = StudentModel.objects.get(stu_email=email)
             if user:
-                user = StudentModel.objects.get(stu_email=email)
-                print(user.stu_password)
-                if user.stu_password==password:
-                    name = user.stu_name
-                    email = user.stu_email
-                    contact = user.stu_mobile
-                    city = user.stu_city
-                    password = user.stu_password
-                    data = {
-                        'name':name,
-                        'email':email,
-                        'contact':contact,
-                        'city':city,
-                        'password':password
-                    }
-                    initial_data = {
-                                    'stu_name': name,
-                                     'stu_email': email
-                                }
-                    form1=QueryForm(initial=initial_data)
-                    data1=StudentQuery.objects.filter(stu_email=email)
-                    return render(request,'dashboard.html',{'form':form ,'query':form1})
-
-        
+                name = user.stu_name
+                email = user.stu_email
+                contact = user.stu_mobile
+                city = user.stu_city
+                password = user.stu_password
+                data = {
+                    'name':name,
+                    'email':email,
+                    'contact':contact,
+                    'city':city,
+                    'password':password
+                }
+                initial_data = {
+                                'stu_name': name,
+                                'stu_email': email
+                            } 
+                form1=QueryForm(initial=initial_data)
+                data1=StudentQuery.objects.filter(stu_email=email)
+                return render(request,'dashboard.html',{'data':data,'query':form1,'data1':data1})
