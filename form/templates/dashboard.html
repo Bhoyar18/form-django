@@ -44,17 +44,17 @@
       {% if data1 %}
       {% for i in data1 %}
       <tr>
-        <!-- <th scope="row">1</th> -->
+        <!-- <th scope="row">{{i.id}}</th> -->
         <td>{{i.id}}</td>
         <td>{{i.stu_name}}</td>
         <td>{{i.stu_email}}</td>
         <td>{{i.stu_query}}</td>
-        <td><button type="button" class="btn btn-warning">EDIT</button></td>
-        <td><button type="button" class="btn btn-danger">DELETE</button></td>
-
-
+        <td><a href="#"><button type="submit" class="btn btn-warning">Edit</button></a></td>
+        <td>
+          <form action="{% url 'delete' pk=i.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
       </tr>
-
 
       {% endfor %}
       {% endif %}
