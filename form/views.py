@@ -174,6 +174,8 @@ def edit(request,pk):
                     'city':city,
                     'password':password
                 }
-        return render(request,'dashboard.html',{'data':data,'query':form1,'data1':data1})
+        return render(request,'dashboard.html',{'data':data,'form1':form1,'pk':pk})
 
+def update(request,pk):
+    print(pk)
     
